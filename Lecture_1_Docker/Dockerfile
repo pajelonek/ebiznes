@@ -12,8 +12,6 @@ RUN apt install curl -y
 
 # JAVA
 RUN apt install openjdk-8-jdk openjdk-8-jre -y
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-ENV JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
 
 # SCALA
 RUN wget https://downloads.lightbend.com/scala/2.12.3/scala-2.12.3.deb && \

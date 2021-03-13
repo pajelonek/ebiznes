@@ -30,7 +30,8 @@ RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.lis
 RUN useradd -ms /bin/bash pjelonek && \
     adduser pjelonek sudo
 
-EXPOSE 8888
+# Expose ports for React(3000) and Play(9000)
+EXPOSE 3000 9000
 
 USER pjelonek
 WORKDIR /home/pjelonek

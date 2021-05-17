@@ -3,3 +3,13 @@
 
 # Intellij files
 /.idea
+/.idea_modules
+# Target files
+target
+
+# sbt play
+logs
+/.classpath
+/.project
+/.settings
+/RUNNING_PID

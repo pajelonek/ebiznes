@@ -1,0 +1,51 @@
+package models
+
+import java.time.Instant
+
+import com.mohiva.play.silhouette.api.util.PasswordInfo
+import com.mohiva.play.silhouette.api.{AuthInfo, Identity, LoginInfo}
+import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
+import com.mohiva.play.silhouette.password.BCryptSha256PasswordHasher
+import play.api.libs.json.{Json, OFormat}
+import reactivemongo.api.bson.{BSONDocumentReader, BSONDocumentWriter, BSONObjectID, Macros}
+
+case class User(
+                 id: Option[String] = Some(BSONObjectID.generate().stringify),
+                 email: String,
+                 password: Option[String] = None,
+                 address: Option[Address],
+                 details: Option[UserDetails],
+                 _updated: Option[Long]
+               )
+  extends ApiModel[User] with Identity {
+  override protected def makeNew(updated: Option[Long]): User = new User(id = Some(BSONObjectID.generate().stringify), email, password, address, details, updated)
+
+  /**
+   * Generates login info from email
+   *
+   * @return login info
+   */
+  def loginInfo: LoginInfo = LoginInfo(CredentialsProvider.ID, email)
+
+  /**
+   * Generates password info from password.
+   *
+   * @return password info
+   */
+  def passwordInfo: PasswordInfo = PasswordInfo(BCryptSha256PasswordHasher.ID, password.get)
+}
+
+object User {
+  implicit val bLoginInfo: OFormat[LoginInfo] = Json.format[LoginInfo]
+  implicit val fmt: OFormat[User] = Json.format[User]
+
+  implicit def LoginInfoReader: BSONDocumentReader[LoginInfo] = Macros.reader[LoginInfo]
+
+  implicit def LoginInfoWriter: BSONDocumentWriter[LoginInfo] = Macros.writer[LoginInfo]
+
+  implicit def userWriter: BSONDocumentWriter[User] = Macros.writer[User]
+
+  implicit def userReader: BSONDocumentReader[User] = Macros.reader[User]
+
+}
+

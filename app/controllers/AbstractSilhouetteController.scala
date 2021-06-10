@@ -6,13 +6,14 @@ import com.mohiva.play.silhouette.api.services.AuthenticatorService
 import com.mohiva.play.silhouette.api.util.{Clock, PasswordHasherRegistry}
 import com.mohiva.play.silhouette.api.{EventBus, Silhouette}
 import com.mohiva.play.silhouette.impl.providers.{CredentialsProvider, SocialProviderRegistry}
+
 import javax.inject.Inject
 import play.api.Logging
 import play.api.http.FileMimeTypes
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import services.UserIdentityService
-import utils.auth.DefaultEnv
+import utils.DefaultEnv
 
 /**
  * Abstract silhouette controller which contains all components to work with authentication

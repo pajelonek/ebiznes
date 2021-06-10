@@ -12,11 +12,12 @@ case class User(
                  email: String,
                  password: Option[String] = None,
                  address: Option[Address],
+                 basket: Option[ShoppingBasket],
                  details: Option[UserDetails],
                  _updated: Option[Long]
                )
   extends ApiModel[User] with Identity {
-  override protected def makeNew(updated: Option[Long]): User = new User(id = Some(BSONObjectID.generate().stringify), email, password, address, details, updated)
+  override protected def makeNew(updated: Option[Long]): User = new User(id = Some(BSONObjectID.generate().stringify), email, password, address, basket, details, updated)
 
   /**
    * Generates login info from email

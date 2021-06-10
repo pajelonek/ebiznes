@@ -1,13 +1,13 @@
-package utils.auth
+package utils
 
 import com.mohiva.play.silhouette.api.actions.SecuredErrorHandler
-import javax.inject.Inject
 import play.api
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc
 import play.api.mvc.RequestHeader
 import play.api.mvc.Results._
 
+import javax.inject.Inject
 import scala.concurrent.Future
 
 /**

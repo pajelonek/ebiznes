@@ -18,6 +18,7 @@ import com.mohiva.play.silhouette.persistence.daos.{DelegableAuthInfoDAO, MongoA
 import com.mohiva.play.silhouette.persistence.repositories.DelegableAuthInfoRepository
 import com.typesafe.config.Config
 import controllers.{DefaultSilhouetteControllerComponents, SilhouetteControllerComponents}
+
 import javax.inject.Named
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
@@ -29,7 +30,7 @@ import play.api.libs.ws.WSClient
 import play.api.mvc.Cookie
 import play.modules.reactivemongo.ReactiveMongoApi
 import services.UserIdentityService
-import utils.auth.{CustomSecuredErrorHandler, CustomUnsecuredErrorHandler, DefaultEnv}
+import utils.{CustomSecuredErrorHandler, CustomUnsecuredErrorHandler, DefaultEnv}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.{Duration, FiniteDuration}

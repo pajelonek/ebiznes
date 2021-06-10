@@ -10,7 +10,7 @@ GET     /ping                       controllers.HomeController.ping()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-# users routing
+# users
 GET           /users                            controllers.UserController.findAll()
 GET           /users/:id                        controllers.UserController.findOne(id: String)
 PUT           /users/:id                        controllers.UserController.update(id: String)
@@ -19,3 +19,23 @@ DELETE        /users/:id                        controllers.UserController.delet
 # Auth
 POST          /signUp                           controllers.SignUpController.signUp()
 POST          /signIn                           controllers.SignInController.signIn()
+
+# products
+GET           /products                         controllers.ItemController.findAll()
+GET           /products/:id                     controllers.ItemController.findOne(id: String)
+POST          /products                         controllers.ItemController.create()
+PUT           /products/:id                     controllers.ItemController.update(id: String)
+DELETE        /products/:id                     controllers.ItemController.delete(id: String)
+
+# category
+GET           /categories                       controllers.CategoryController.findAll()
+GET           /categories/products/:name        controllers.CategoryController.findProducts(name: String)
+
+# user details routing
+GET           /userDetails                      controllers.UserDetailsController.findAll()
+GET           /userDetails/:userId              controllers.UserDetailsController.findOne(userId: String)
+POST          /userDetails                      controllers.UserDetailsController.create()
+
+# basket routing
+GET           /baskets                          controllers.ShoppingBasketController.findOne()
+POST          /baskets                          controllers.ShoppingBasketController.create()

@@ -25,7 +25,7 @@ RUN echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" \
 
 EXPOSE 9000
 
-COPY ./play /home/pajelonek/ebiznes/
+COPY . /home/pajelonek/ebiznes/
 WORKDIR /home/pajelonek/ebiznes
 
 RUN sbt compile

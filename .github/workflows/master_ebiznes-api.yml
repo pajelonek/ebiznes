@@ -48,4 +48,4 @@ jobs:
         app-name: 'ebiznes-api'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_c11dcf1b340e4b11b019fe781450a0f3 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_4d598222c2d346b783d306ad68fd5d18 }}/jelon97/ebiznes2021:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_4d598222c2d346b783d306ad68fd5d18 }}/ebiznes2021:${{ github.sha }}'

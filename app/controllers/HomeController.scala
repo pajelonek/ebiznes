@@ -25,4 +25,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   def ping() = Action { implicit request: Request[AnyContent] =>
     Ok("PONG")
   }
+
+  def test() = Action { implicit request: Request[AnyContent] =>
+    Ok("Everything is fine")
+  }
 }

@@ -6,7 +6,7 @@ on:
       - 'master'
 
 jobs:
-  docker:
+  Build container iamge:
     runs-on: ubuntu-latest
     steps:
       -

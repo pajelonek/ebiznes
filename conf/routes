@@ -40,3 +40,9 @@ POST          /userDetails                      controllers.UserDetailsControlle
 # basket routing
 GET           /baskets                          controllers.ShoppingBasketController.findOne()
 POST          /baskets                          controllers.ShoppingBasketController.create()
+
+# Social Auth
+GET           /authenticate/:provider           controllers.SocialAuthController.authenticate(provider: String)
+
+# profile
+GET           /profile                     controllers.ProfileController.findOne()

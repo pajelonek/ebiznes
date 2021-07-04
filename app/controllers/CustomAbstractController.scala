@@ -20,19 +20,22 @@ abstract class CustomAbstractController[T: Writes : Reads](
   }
   )
 
+  private val CANNOT_PARSE_ID = "Cannot parse id";
+  private val CANNOT_PARSE_REQUEST = "Cannot parse request";
+
   def findOne(id: String): Action[AnyContent] = Action.async(implicit request => {
 
     val objectIdTryResult = BSONObjectID.parse(id)
     objectIdTryResult match {
       case Success(objectId) => repository.findOne(id).map(model => Ok(Json.toJson(model)))
-      case Failure(_) => Future.successful(BadRequest("Cannot parse id"))
+      case Failure(_) => Future.successful(BadRequest(CANNOT_PARSE_ID))
     }
   })
 
   def create(): Action[JsValue] = Action.async(controllerComponents.parsers.json)(implicit request => {
 
     request.body.validate[T].fold(
-      _ => Future.successful(BadRequest("Cannot parse request")),
+      _ => Future.successful(BadRequest(CANNOT_PARSE_REQUEST)),
       model =>
         repository.create(model).map(_ => Created(Json.toJson(model)))
     )
@@ -41,12 +44,12 @@ abstract class CustomAbstractController[T: Writes : Reads](
   def update(id: String): Action[JsValue] = Action.async(controllerComponents.parsers.json)(implicit request => {
 
     request.body.validate[T].fold(
-      _ => Future.successful(BadRequest("Cannot parse request")),
+      _ => Future.successful(BadRequest(CANNOT_PARSE_REQUEST)),
       model => {
         val objectIdTryResult = BSONObjectID.parse(id)
         objectIdTryResult match {
           case Success(objectId) => repository.update(id, model).map(result => Ok(Json.toJson(result.ok)))
-          case Failure(_) => Future.successful(BadRequest("Cannot parse id"))
+          case Failure(_) => Future.successful(BadRequest(CANNOT_PARSE_ID))
         }
       }
     )
@@ -57,7 +60,7 @@ abstract class CustomAbstractController[T: Writes : Reads](
     val objectIdTryResult = BSONObjectID.parse(id)
     objectIdTryResult match {
       case Success(objectId) => repository.delete(id).map(_ => NoContent)
-      case Failure(_) => Future.successful(BadRequest("Cannot parse id"))
+      case Failure(_) => Future.successful(BadRequest(CANNOT_PARSE_ID))
     }
   })
 }

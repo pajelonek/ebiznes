@@ -18,7 +18,7 @@ class ShoppingBasketController @Inject()(
                                           scc: SilhouetteControllerComponents)
   extends CustomAbstractController[ShoppingBasket] {
 
-  override def create(): Action[JsValue] = SecuredAction(WithProvider[DefaultEnv#A](CredentialsProvider.ID)).async(scc.parsers.json)(implicit request => {
+  override def create(): Action[JsValue] = securedAction(WithProvider[DefaultEnv#A](CredentialsProvider.ID)).async(scc.parsers.json)(implicit request => {
 
     request.body.validate[ShoppingBasket].fold(
       _ => Future.successful(BadRequest("Cannot parse request")),
@@ -37,7 +37,7 @@ class ShoppingBasketController @Inject()(
     )
   })
 
-  def findOne(): Action[AnyContent] = SecuredAction(WithProvider[DefaultEnv#A](CredentialsProvider.ID)).async(implicit request => {
+  def findOne(): Action[AnyContent] = securedAction(WithProvider[DefaultEnv#A](CredentialsProvider.ID)).async(implicit request => {
 
     userService.retrieve(request.identity.loginInfo).flatMap {
       case Some(_) =>
